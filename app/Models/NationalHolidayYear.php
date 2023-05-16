@@ -6,6 +6,7 @@ use DateInterVal;
 use DateTime;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use function easter_date;
@@ -24,6 +25,7 @@ use function easter_date;
  * @property int $sunday
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read array $work_days
  * @method static Builder|NationalHolidayYear newModelQuery()
  * @method static Builder|NationalHolidayYear newQuery()
  * @method static Builder|NationalHolidayYear query()
@@ -51,6 +53,18 @@ class NationalHolidayYear extends Model
         });
 
         parent::boot();
+    }
+
+    /**
+     * Return an array of work days.
+     *
+     * @noinspection PhpUnused
+     */
+    protected function workDays(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->only(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
+        );
     }
 
     /**
