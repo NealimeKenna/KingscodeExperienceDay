@@ -89,6 +89,7 @@ class NationalHolidayYear extends Model
         $dates->add(new DateTime("$this->year-05-05")); // Liberation day
         $dates->add(new DateTime("$this->year-12-25")); // Christmas
         $dates->add(new DateTime("$this->year-12-26")); // Boxing day (Christmas second day)
+        $dates->add(new DateTime("$this->year-12-31")); // New years eve
 
         $monarchDay = new DateTime("$this->year-04-27");
 
