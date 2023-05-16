@@ -135,7 +135,7 @@ class NationalHolidayYear extends Model
         }
 
         $dates->each(function (DateTime $date) {
-            // I'm get the textual weekday of the date and add 1 to that day of the year.
+            // Get the textual weekday of the date and add 1 to that day of the year.
             $weekday = strtolower($date->format('l'));
 
             $this->$weekday++;
