@@ -7,6 +7,7 @@ use DateTime;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use function easter_date;
@@ -44,6 +45,8 @@ use function easter_date;
  */
 class NationalHolidayYear extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['year'];
 
     protected static function boot()
