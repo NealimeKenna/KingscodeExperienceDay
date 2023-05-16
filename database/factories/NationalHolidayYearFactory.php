@@ -20,7 +20,7 @@ class NationalHolidayYearFactory extends Factory
     public function definition(): array
     {
         return [
-            'year' => $this->faker->year('2037'),
+            'year' => $this->faker->year(),
             'monday' => $this->faker->randomDigit(),
             'tuesday' => $this->faker->randomDigit(),
             'wednesday' => $this->faker->randomDigit(),

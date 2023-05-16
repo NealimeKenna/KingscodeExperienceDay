@@ -13,7 +13,7 @@ class NationalHolidayYearTest extends TestCase
     public function testWorkDays(): void
     {
         /** @var NationalHolidayYear $year */
-        $year = NationalHolidayYear::factory()->create();
+        $year = NationalHolidayYear::factory()->make();
 
         $this->assertIsArray($year->work_days);
         $this->assertContainsOnly('int', $year->work_days);
