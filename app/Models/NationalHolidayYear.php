@@ -96,36 +96,40 @@ class NationalHolidayYear extends Model
 
         $dates->add($monarchDay);
 
-        // Calculated holidays
-        $easter = new DateTime();
-        $easter->setTimestamp(easter_date($this->year)); // Use PHP's easter function
+        // easter_date is limited to the Unix timestamp range 1970-2037, set a reminder for the future.
+        // https://www.php.net/manual/en/function.easter-date.php
+        if ($this->year >= 1970 && $this->year <= 2037) {
+            // Calculated holidays
+            $easter = new DateTime();
+            $easter->setTimestamp(easter_date($this->year)); // Use PHP's easter function
 
-        $dates->add($easter);
+            $dates->add($easter);
 
-        $easterMonday = clone $easter;
-        $easterMonday->add(new DateInterVal('P1D')); // 1 day after Easter
+            $easterMonday = clone $easter;
+            $easterMonday->add(new DateInterVal('P1D')); // 1 day after Easter
 
-        $dates->add($easterMonday);
+            $dates->add($easterMonday);
 
-        $goodFriday = clone $easter;
-        $goodFriday->sub(new DateInterval('P2D')); // 2 days before Easter
+            $goodFriday = clone $easter;
+            $goodFriday->sub(new DateInterval('P2D')); // 2 days before Easter
 
-        $dates->add($goodFriday);
+            $dates->add($goodFriday);
 
-        $ascensionDay = clone $easter;
-        $ascensionDay->add(new DateInterVal('P39D')); // 39 days after Easter
+            $ascensionDay = clone $easter;
+            $ascensionDay->add(new DateInterVal('P39D')); // 39 days after Easter
 
-        $dates->add($ascensionDay);
+            $dates->add($ascensionDay);
 
-        $whitSunday = clone $ascensionDay;
-        $whitSunday->add(new DateInterVal('P10D')); // 10 days after Ascension day
+            $whitSunday = clone $ascensionDay;
+            $whitSunday->add(new DateInterVal('P10D')); // 10 days after Ascension day
 
-        $dates->add($whitSunday);
+            $dates->add($whitSunday);
 
-        $whitMonday = clone $whitSunday;
-        $whitMonday->add(new DateInterVal('P1D')); // 1 day after whit sunday
+            $whitMonday = clone $whitSunday;
+            $whitMonday->add(new DateInterVal('P1D')); // 1 day after whit sunday
 
-        $dates->add($whitMonday);
+            $dates->add($whitMonday);
+        }
 
         $dates->each(function (DateTime $date) {
             // I'm get the textual weekday of the date and add 1 to that day of the year.
