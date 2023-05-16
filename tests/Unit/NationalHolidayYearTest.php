@@ -8,7 +8,7 @@ use Tests\TestCase;
 class NationalHolidayYearTest extends TestCase
 {
     /**
-     * A basic unit test example.
+     * Make sure the work_days property is an array.
      */
     public function testWorkDays(): void
     {
