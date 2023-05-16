@@ -16,5 +16,6 @@ class NationalHolidayYearTest extends TestCase
         $year = NationalHolidayYear::factory()->create();
 
         $this->assertIsArray($year->work_days);
+        $this->assertContainsOnly('int', $year->work_days);
     }
 }
