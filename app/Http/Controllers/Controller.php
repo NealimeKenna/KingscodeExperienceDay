@@ -14,7 +14,12 @@ class Controller extends BaseController
 
     public function bestDaysToWork(Request $request): array
     {
-        $request->validate(['hours' => ['required', 'numeric'], 'year' => ['required', 'numeric']]);
+        $request->validate([
+            'hours' => ['required', 'numeric'],
+            // easter_date is limited to the Unix timestamp range 1970-2037, set a reminder for the future.
+            // https://www.php.net/manual/en/function.easter-date.php
+            'year' => ['required', 'numeric', 'between:1970,2037']
+        ]);
 
         // Creating a new NationalHolidayYear will automatically calculate the holidays per weekday.
         $year = NationalHolidayYear::firstOrCreate(['year' => $request->input('year')]);
